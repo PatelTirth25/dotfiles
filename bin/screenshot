@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Directory to save screenshots
+DIR=~/pix/ss
+
+# Create the directory if it doesn't exist
+mkdir -p "$DIR"
+
+# Find the next available file name
+next_file=$(ls "$DIR"/ss*.* 2>/dev/null | sort -V | tail -n 1 | sed 's/[^0-9]*//g')
+if [ -z "$next_file" ]; then
+    next_file=0
+fi
+next_file=$((next_file + 1))
+
+# Screenshot file path
+screenshot="$DIR/ss$next_file.png"
+
+# Take a screenshot and save it
+grim -g "$(slurp)" "$screenshot"
+
+# Copy the screenshot to clipboard
+wl-copy --type image/png < "$screenshot"

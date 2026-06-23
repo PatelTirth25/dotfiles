@@ -1,0 +1,56 @@
+# Directory containing all projects
+BASE_DIR="/home/tirth/code"
+
+# Get list of directories and let user choose with fzf
+echo "Select a project:"
+selected_project=$(find "$BASE_DIR" -maxdepth 1 -type d ! -name ".*" ! -path "$BASE_DIR" -exec basename {} \; | fzf --prompt="Project: " --height=40% --reverse --border)
+
+# Check if user cancelled selection
+if [ -z "$selected_project" ]; then
+    echo "No project selected"
+    exit 1
+fi
+
+# Get full path
+selected_project="$BASE_DIR/$selected_project"
+
+# Session name (using project name as session name)
+SESSION_NAME="$(basename "$selected_project")"
+
+tmux kill-session -t "$SESSION_NAME" 2>/dev/null
+
+# Start a new tmux session with a temporary window
+tmux new-session -d -s "$SESSION_NAME"
+
+# Check if there are any non-dot files in the directory
+if find "$selected_project" -maxdepth 1 -type f ! -name ".*" | read -r; then
+    # If there's even a single non-dot file, open the entire directory in nvim
+    tmux new-window -t "$SESSION_NAME" -n "editor" "cd $selected_project && nvim $selected_project"
+else
+    # If all items are folders, first create all nvim windows
+    for folder in "$selected_project"/*/; do
+        window_name="$(basename "$folder")"
+        tmux new-window -t "$SESSION_NAME" -n "$window_name" "cd $folder && nvim $folder"
+    done
+fi
+
+# Now create all terminal windows
+if find "$selected_project" -maxdepth 1 -type f ! -name ".*" | read -r; then
+    # Create a terminal window for the main directory
+    tmux new-window -t "$SESSION_NAME" -n "View_editor" "cd $selected_project && zsh"
+else
+    # Create terminal windows for each directory
+    for folder in "$selected_project"/*/; do
+        window_name="$(basename "$folder")"
+        tmux new-window -t "$SESSION_NAME" -n "View_$window_name" "cd $folder && zsh"
+    done
+fi
+
+# Kill the first temporary window
+tmux kill-window -t "$SESSION_NAME":0
+
+# Select the first window
+tmux select-window -t "$SESSION_NAME":1
+
+# Attach to the tmux session
+tmux attach-session -t "$SESSION_NAME"

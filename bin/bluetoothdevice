@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# Function to check if a Bluetooth device is connected and get its info
+get_bluetooth_info() {
+    # Get device info
+    device_info=$(bluetoothctl info)
+
+    # Extract the device name
+    device_name=$(echo "$device_info" | grep "Name:" | awk -F 'Name: ' '{print $2}')
+
+    # Extract the battery level
+    battery_level=$(echo "$device_info" | grep "Battery Percentage:" | awk -F '[()]' '{print $2}' | tr -d ' %')
+
+    # Check if device name and battery level are not empty
+    if [[ -n $device_name && -n $battery_level ]]; then
+        echo "  $device_name $battery_level%"
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Main script
+if get_bluetooth_info; then
+    exit 0
+else
+    echo " "
+    exit 1
+fi

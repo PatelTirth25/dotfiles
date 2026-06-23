@@ -1,0 +1,5 @@
+datetime() {
+    date +"  %H:%M"
+}
+
+datetime

@@ -1,0 +1,14 @@
+# Check if an argument is provided
+if [ -n "$1" ]; then
+    # Use the provided wallpaper path
+    newwall="$1"
+else
+    # Randomly select a wallpaper from the default directory
+    newwall=$(find ~/pix/wallpaper/ -type f | shuf -n 1)
+fi
+
+# wal -i /home/tirth/pix/wallpaper/maskgirl.jpg
+wal -i "$newwall" &
+
+# Apply the wallpaper
+swaybg -m fill -i "$newwall" &

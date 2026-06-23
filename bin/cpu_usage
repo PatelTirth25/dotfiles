@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Function to calculate CPU usage
+get_cpu_usage() {
+    # Read the first line of /proc/stat, which contains aggregate CPU statistics
+    local cpu_line=$(head -n 1 /proc/stat)
+    
+    # Extract the values from the line
+    local user=$(echo $cpu_line | awk '{print $2}')
+    local nice=$(echo $cpu_line | awk '{print $3}')
+    local system=$(echo $cpu_line | awk '{print $4}')
+    local idle=$(echo $cpu_line | awk '{print $5}')
+    local iowait=$(echo $cpu_line | awk '{print $6}')
+    local irq=$(echo $cpu_line | awk '{print $7}')
+    local softirq=$(echo $cpu_line | awk '{print $8}')
+    local steal=$(echo $cpu_line | awk '{print $9}')
+    local guest=$(echo $cpu_line | awk '{print $10}')
+    local guest_nice=$(echo $cpu_line | awk '{print $11}')
+    
+    # Calculate total and idle times
+    local total=$((user + nice + system + idle + iowait + irq + softirq + steal + guest + guest_nice))
+    local idle_all=$((idle + iowait))
+    
+    echo "$total $idle_all"
+}
+
+# Get initial CPU stats
+read -r total_prev idle_prev < <(get_cpu_usage)
+
+while true; do
+    sleep 1
+    
+    # Get current CPU stats
+    read -r total idle < <(get_cpu_usage)
+    
+    # Calculate the differences
+    total_diff=$((total - total_prev))
+    idle_diff=$((idle - idle_prev))
+    
+    # Calculate the CPU usage percentage with one decimal place
+    cpu_usage=$(awk "BEGIN {printf \"%.1f\", 100 * ($total_diff - $idle_diff) / $total_diff}")
+
+    # Update previous values
+    total_prev=$total
+    idle_prev=$idle
+    
+    # Print the CPU usage
+    echo "  $cpu_usage%"
+done

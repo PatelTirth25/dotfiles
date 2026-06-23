@@ -1,0 +1,27 @@
+# Check if a compositor argument is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 {sway|niri}"
+    exit 1
+fi
+
+COMPOSITOR="$1"
+
+# Validate compositor argument
+if [ "$COMPOSITOR" != "sway" ] && [ "$COMPOSITOR" != "niri" ]; then
+    echo "Error: Invalid compositor. Use 'sway' or 'niri'"
+    exit 1
+fi
+
+# Set up PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# Kill existing waybar instances
+pkill waybar
+
+# Start waybar with the appropriate config
+# waybar -c ~/.config/waybar/config-${COMPOSITOR} -s ~/.config/waybar/style.css &
+setsid waybar
+
+# Start other services
+setsid ~/.local/bin/wallpaper
+setsid gammastep -c ~/.config/gammastep/config.ini

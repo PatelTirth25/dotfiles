@@ -1,0 +1,28 @@
+#!/bin/bash
+nmcli radio wifi on
+nmcli device wifi list | head -n 10
+# Prompt the user for WiFi SSID (network name) and password
+read -p "Enter WiFi SSID: " ssid
+read -s -p "Enter WiFi password: " password
+echo
+
+# Use nmcli to connect to the specified WiFi network
+echo "Connecting to WiFi network '$ssid'..."
+
+# Check if the specified WiFi network is already in the list of known connections
+if nmcli connection show --active | grep -q "$ssid"; then
+    echo "Already connected to '$ssid'. Disconnecting first..."
+    nmcli connection down "$ssid"  # Disconnect from the network if already connected
+fi
+
+# Add a new WiFi connection profile if it doesn't exist
+if ! nmcli connection show | grep -q "$ssid"; then
+    echo "Adding WiFi connection profile for '$ssid'..."
+    nmcli device wifi connect "$ssid" password "$password" || { echo "Failed to add connection profile."; exit 1; }
+fi
+
+# Connect to the WiFi network
+nmcli device wifi connect "$ssid" password "$password" || { echo "Failed to connect to WiFi."; exit 1; }
+
+echo "Connected to WiFi network '$ssid' successfully."
+

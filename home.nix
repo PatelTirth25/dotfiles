@@ -1,29 +1,71 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  configDirs = [
+    "sway"
+    "nvim"
+    "kitty"
+    "waybar"
+    "rofi"
+    "gammastep"
+    "nwg-look"
+    "swaylock"
+  ];
+
+  binFiles = [
+    "screenshot"
+    "battery"
+    "bluetoothdevice"
+    "clearcache"
+    "connectwifi"
+    "cpu_usage"
+    "dateformat"
+    "ram_usage"
+    "startup"
+    "timeformat"
+    "tmux_start"
+    "volume"
+    "wallpaper"
+    "wifiName"
+  ];
+in
 {
-	home.username = "tirth";
-	home.homeDirectory = "/home/tirth";
-	programs.git.enable = true;
-	home.stateVersion = "26.05";
-	programs.bash = {
-		enable = true;
-	};
+  home.username = "tirth";
+  home.homeDirectory = "/home/tirth";
 
-    xdg.configFile."sway".source = ./config/sway;
-    xdg.configFile."nvim".source = ./config/nvim;
-    xdg.configFile."kitty".source = ./config/kitty;
-    xdg.configFile."waybar".source = ./config/waybar;
-    xdg.configFile."rofi".source = ./config/rofi;
-    xdg.configFile."gammastep".source = ./config/gammastep;
-    xdg.configFile."nwg-look".source = ./config/nwg-look;
-    xdg.configFile."swaylock".source = ./config/swaylock;
+  home.stateVersion = "26.05";
 
-    home.packages = with pkgs; [
-        neovim
-        ripgrep
-        nil
-        nixpkgs-fmt
-        gcc
-        nodejs
-    ];
+  programs.git.enable = true;
+  programs.bash.enable = true;
+
+  home.packages = with pkgs; [
+    neovim
+    ripgrep
+    nil
+    nixpkgs-fmt
+    gcc
+    nodejs
+  ];
+
+  xdg.configFile =
+    builtins.listToAttrs (
+      map (name: {
+        name = name;
+        value = {
+          source = ./config/${name};
+          recursive = true;
+        };
+      }) configDirs
+    );
+
+  home.file =
+    builtins.listToAttrs (
+      map (name: {
+        name = ".local/bin/${name}";
+        value = {
+          source = ./bin/${name};
+          executable = true;
+        };
+      }) binFiles
+    );
 }

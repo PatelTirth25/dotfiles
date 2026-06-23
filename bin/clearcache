@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+set -e
+
+echo "=== Removing npm cache folders ==="
+npm cache clean --force 2>/dev/null || true
+rm -rf ~/.cache/npm
+rm -rf ~/.npm/_npx
+rm -rf ~/.npm/_logs
+rm -rf ~/.npm/_cacache
+rm -rf node_modules/.cache 2>/dev/null || true
+
+echo "=== Cleaning pnpm cache ==="
+pnpm store prune 2>/dev/null || true
+rm -rf ~/.pnpm-store
+rm -rf ~/.local/share/pnpm/store
+
+echo "=== Cleaning yarn cache ==="
+yarn cache clean --all 2>/dev/null || true
+rm -rf ~/.cache/yarn
+rm -rf ~/.yarn
+
+echo "=== Cleaning cargo cache ==="
+cargo cache -a 2>/dev/null || true
+rm -rf ~/.cargo/registry
+rm -rf ~/.cargo/git
+
+echo "=== Cleaning Nix generations ==="
+
+# Delete old user profile generations
+nix profile wipe-history --older-than 7d 2>/dev/null || true
+
+# Delete old system generations
+sudo nix-collect-garbage --delete-older-than 7d
+
+echo "=== Optimizing Nix store ==="
+sudo nix-store --optimise
+
+echo "=== Cleaning old boot entries ==="
+sudo /run/current-system/bin/switch-to-configuration boot
+
+echo "=== Cleaning journal logs (keeping last 1 weeks) ==="
+sudo journalctl --vacuum-time=1weeks
+
+echo "=== Cleaning Docker ==="
+sudo docker system prune -af --volumes 2>/dev/null || true
+
+echo "=== Cleaning Trash ==="
+rm -rf ~/.local/share/Trash/*
+
+echo "=== Cleanup complete ==="

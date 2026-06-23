@@ -1,0 +1,5 @@
+datetime() {
+    date +"  %d-%m %A "
+}
+
+datetime
