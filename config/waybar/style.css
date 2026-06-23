@@ -1,0 +1,105 @@
+@import "mocha.css";
+
+* {
+    font-size: 15px;
+    min-height: 0;
+}
+
+#waybar {
+    background: transparent;
+    color: @text;
+    margin: 0;
+    padding: 0;
+}
+
+#workspaces {
+    background-color: rgba(0, 0, 0, 0.9);
+    margin: 0;
+    padding: 0 2px;
+    border-radius: 0 0 10px 10px;
+}
+
+#workspaces button {
+    color: @lavender;
+    background-color: transparent;
+    padding: 0.3rem 0.6rem;
+    margin: 0 1px;
+    transition: background-color 0.2s ease;
+    border-radius: 0 0 10px 10px;
+}
+
+#workspaces button.focused {
+    color: @base;
+    background-color: @lavender;
+    font-weight: bold;
+}
+
+#workspaces button:hover {
+    color: @sapphire;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#backlight,
+#custom-date,
+#custom-time,
+#custom-battery,
+#custom-wifi,
+#custom-memory,
+#custom-restart,
+#bluetooth,
+#cpu,
+#pulseaudio,
+#custom-power {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 0.3rem 0.7rem;
+    border-radius: 0;
+}
+
+#custom-date {
+    color: @blue;
+}
+
+#custom-time {
+    color: rgb(250, 111, 115);
+}
+
+#custom-battery {
+    color: @green;
+}
+
+#backlight {
+    color: @yellow;
+    border-radius: 0 0 0 10px;
+}
+
+#pulseaudio {
+    color: @maroon;
+}
+
+#custom-power {
+    color: orangered;
+    font-size: 1.3rem;
+    border-radius: 0 0 10px 0;
+}
+
+#custom-restart {
+    color: green;
+}
+
+#cpu {
+    color: cyan;
+    border-radius: 0 0 0 10px;
+}
+
+#custom-memory {
+    color: @green;
+}
+
+#custom-wifi {
+    color: orange;
+}
+
+#bluetooth {
+    color: pink;
+    border-radius: 0 0 10px 0;
+}
