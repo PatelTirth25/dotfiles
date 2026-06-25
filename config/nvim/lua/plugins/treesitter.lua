@@ -1,34 +1,66 @@
 return {
-    { -- Highlight, edit, and navigate code
+    {
         "nvim-treesitter/nvim-treesitter",
+
         build = ":TSUpdate",
+
+        main = "nvim-treesitter.configs",
+
         opts = {
             ensure_installed = {
                 "bash",
                 "c",
                 "cpp",
                 "rust",
-                "javascript",
-                "diff",
-                "html",
+
                 "lua",
                 "luadoc",
-                "markdown",
                 "vim",
                 "vimdoc",
-                "python",
+
+                "javascript",
                 "typescript",
+                "tsx",
+
+                "html",
+
+                "json",
+                "yaml",
+                "toml",
+
+                "markdown",
+                "markdown_inline",
+
+                "python",
+
+                "diff",
+                "query",
             },
-            -- Autoinstall languages that are not installed
+
             auto_install = true,
+
             highlight = {
                 enable = true,
             },
-            indent = { enable = true },
+
+            indent = {
+                enable = true,
+            },
+
+            autotag = {
+                enable = true,
+            },
+
+            incremental_selection = {
+                enable = true,
+
+                keymaps = {
+                    init_selection = "<C-space>",
+                    node_incremental = "<C-space>",
+                    scope_incremental = false,
+                    node_decremental = "<BS>",
+                },
+            },
         },
-        config = function(_, opts)
-            require("nvim-treesitter.configs").setup(opts)
-        end,
     },
 }
-

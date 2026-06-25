@@ -23,7 +23,7 @@
         powerOnBoot = false;
     };
 
-  services.flatpak.enable = true;
+    # services.flatpak.enable = false;
 
   hardware.graphics.enable = true;
   security.polkit.enable = true;

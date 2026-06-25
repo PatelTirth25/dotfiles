@@ -17,7 +17,7 @@ set $up l
 set $term kitty 
 set $menu /home/tirth/.config/rofi/launchers/type-6/launcher.sh
 set $file nemo
-set $browser zen-beta
+set $browser app.zen_browser.zen
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -48,7 +48,7 @@ set $browser zen-beta
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
-exec /home/tirth/.local/bin/startup sway 
+exec ~/.local/bin/startup sway & 
 
 # Start polkit agent
 exec_always /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -93,10 +93,10 @@ exec_always /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # Basics:
 #
     # Start a terminal
-    bindsym $mod+Return exec $term
+    bindsym $mod+Return exec $$term
 
-    bindsym $mod+b exec $browser
-    bindsym $mod+n exec $file
+    bindsym $mod+b exec $$browser
+    bindsym $mod+n exec $$file
 
     # Kill focused window
     bindsym $mod+y kill

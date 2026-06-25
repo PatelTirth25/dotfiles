@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 let
   configDirs = [
@@ -30,15 +30,24 @@ let
   ];
 in
 {
+  imports = [
+    inputs.zen-browser.homeModules.beta
+  ];
+
   home.username = "tirth";
   home.homeDirectory = "/home/tirth";
-
   home.stateVersion = "26.05";
 
   programs.git.enable = true;
   programs.bash.enable = true;
 
+  programs.zen-browser = {
+    enable = true;
+    setAsDefaultBrowser = true;
+  };
+
   home.packages = with pkgs; [
+    vim
     neovim
     ripgrep
     nil
