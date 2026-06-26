@@ -3,7 +3,6 @@
 let
   configDirs = [
     "sway"
-    "nvim"
     "kitty"
     "waybar"
     "rofi"
@@ -47,33 +46,31 @@ in
     setAsDefaultBrowser = true;
   };
 
-    programs.tmux = {
-        enable = true;
-        shortcut = "b"; 
-        keyMode = "vi";
+  programs.tmux = {
+    enable = true;
+    shortcut = "b";
+    keyMode = "vi";
 
-        plugins = with pkgs.tmuxPlugins; [
-            {
-                plugin = tmux-fzf;
-                extraConfig = ''
+    plugins = with pkgs.tmuxPlugins; [
+      {
+        plugin = tmux-fzf;
+        extraConfig = ''
                 '';
-            }
-        ];
-    };
+      }
+    ];
+  };
 
-    programs.fzf = {
-        enable = true;
-        enableBashIntegration = true;
-        enableZshIntegration = true; # If you use Zsh
-        # Optional tmux pop-up window settings for fzf queries
-        tmux.enableShellIntegration = true;
-    };
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    tmux.enableShellIntegration = true;
+  };
 
   home.packages = with pkgs; [
     helix
     opencode
     vim
-    neovim
     ripgrep
     nil
     nixpkgs-fmt
@@ -93,23 +90,27 @@ in
 
   xdg.configFile =
     builtins.listToAttrs (
-      map (name: {
-        name = name;
-        value = {
-          source = ./config/${name};
-          recursive = true;
-        };
-      }) configDirs
+      map
+        (name: {
+          name = name;
+          value = {
+            source = ./config/${name};
+            recursive = true;
+          };
+        })
+        configDirs
     );
 
   home.file =
     builtins.listToAttrs (
-      map (name: {
-        name = ".local/bin/${name}";
-        value = {
-          source = ./bin/${name};
-          executable = true;
-        };
-      }) binFiles
+      map
+        (name: {
+          name = ".local/bin/${name}";
+          value = {
+            source = ./bin/${name};
+            executable = true;
+          };
+        })
+        binFiles
     );
 }
