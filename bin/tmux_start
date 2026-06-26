@@ -24,13 +24,13 @@ tmux new-session -d -s "$SESSION_NAME"
 
 # Check if there are any non-dot files in the directory
 if find "$selected_project" -maxdepth 1 -type f ! -name ".*" | read -r; then
-    # If there's even a single non-dot file, open the entire directory in nvim
-    tmux new-window -t "$SESSION_NAME" -n "editor" "cd $selected_project && nvim $selected_project"
+    # If there's even a single non-dot file, open the entire directory in hx
+    tmux new-window -t "$SESSION_NAME" -n "editor" "cd $selected_project && hx $selected_project"
 else
-    # If all items are folders, first create all nvim windows
+    # If all items are folders, first create all hx windows
     for folder in "$selected_project"/*/; do
         window_name="$(basename "$folder")"
-        tmux new-window -t "$SESSION_NAME" -n "$window_name" "cd $folder && nvim $folder"
+        tmux new-window -t "$SESSION_NAME" -n "$window_name" "cd $folder && hx $folder"
     done
 fi
 

@@ -12,6 +12,11 @@ let
     "helix"
   ];
 
+
+  homeFiles = [
+    ".zshrc"
+  ];
+
   binFiles = [
     "screenshot"
     "battery"
@@ -102,7 +107,18 @@ in
     );
 
   home.file =
-    builtins.listToAttrs (
+    (builtins.listToAttrs (
+      map
+        (name: {
+          name = name;
+          value = {
+            source = ./home/${name};
+          };
+        })
+        homeFiles
+    ))
+    //
+    (builtins.listToAttrs (
       map
         (name: {
           name = ".local/bin/${name}";
@@ -112,5 +128,6 @@ in
           };
         })
         binFiles
-    );
+    ));
+
 }
