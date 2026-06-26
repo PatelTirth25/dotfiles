@@ -1,0 +1,31 @@
+[[language]]
+name = "rust"
+auto-format = true
+
+[[language]]
+name = "c"
+auto-format = true
+
+[[language]]
+name = "cpp"
+auto-format = true
+
+[[language]]
+name = "lua"
+formatter = { command = "stylua", args = ["-"] }
+
+[[language]]
+name = "javascript"
+formatter = { command = "prettierd" }
+
+[[language]]
+name = "typescript"
+formatter = { command = "prettierd" }
+
+[[language]]
+name = "nix"
+formatter = { command = "nixfmt" }
+
+[[language]]
+name = "python"
+formatter = { command = "black", args = ["-q", "-"] }

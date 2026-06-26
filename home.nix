@@ -10,6 +10,7 @@ let
     "gammastep"
     "nwg-look"
     "swaylock"
+    "helix"
   ];
 
   binFiles = [
@@ -46,7 +47,31 @@ in
     setAsDefaultBrowser = true;
   };
 
+    programs.tmux = {
+        enable = true;
+        shortcut = "b"; 
+        keyMode = "vi";
+
+        plugins = with pkgs.tmuxPlugins; [
+            {
+                plugin = tmux-fzf;
+                extraConfig = ''
+                '';
+            }
+        ];
+    };
+
+    programs.fzf = {
+        enable = true;
+        enableBashIntegration = true;
+        enableZshIntegration = true; # If you use Zsh
+        # Optional tmux pop-up window settings for fzf queries
+        tmux.enableShellIntegration = true;
+    };
+
   home.packages = with pkgs; [
+    helix
+    opencode
     vim
     neovim
     ripgrep
@@ -54,6 +79,16 @@ in
     nixpkgs-fmt
     gcc
     nodejs
+    clang-tools
+    basedpyright
+    black
+    typescript-language-server
+    typescript
+    prettierd
+    lua-language-server
+    stylua
+    rust-analyzer
+    rustfmt
   ];
 
   xdg.configFile =
