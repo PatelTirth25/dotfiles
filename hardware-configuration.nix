@@ -5,30 +5,47 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "sdhci_pci" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.supportedFilesystems = [ "ntfs" ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/6759b48d-5129-4c2a-8d71-53b62bbce53f";
+    {
+      device = "/dev/disk/by-uuid/6759b48d-5129-4c2a-8d71-53b62bbce53f";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/2741-E305";
+    {
+      device = "/dev/disk/by-uuid/2741-E305";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/52f331c4-27c7-41fd-9563-f424ce0adcb6";
+    {
+      device = "/dev/disk/by-uuid/52f331c4-27c7-41fd-9563-f424ce0adcb6";
       fsType = "ext4";
     };
 
+
+  fileSystems."/home/windows" = {
+    device = "/dev/disk/by-uuid/18E8A5A7E8A5841A";
+    fsType = "ntfs3";
+    options = [
+      "rw"
+      "uid=1000"
+      "gid=users"
+      "umask=0022"
+      "nofail"
+    ];
+  };
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

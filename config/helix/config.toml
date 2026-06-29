@@ -22,8 +22,7 @@ normal = "block"
 select = "underline"
 
 [editor.indent-guides]
-render = true
-character = "▏"
+render = false
 
 [editor.soft-wrap]
 enable = false
