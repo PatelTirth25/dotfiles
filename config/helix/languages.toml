@@ -1,33 +1,44 @@
 [[language]]
-name = "global"
-auto-format = true
-indent = { tab-width = 4, unit = "    " }
-
-[[language]]
 name = "rust"
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
 
 [[language]]
 name = "c"
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
 
 [[language]]
 name = "cpp"
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
 
 [[language]]
 name = "lua"
 formatter = { command = "stylua", args = ["-"] }
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
 
 [[language]]
 name = "javascript"
 formatter = { command = "prettierd" }
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
 
 [[language]]
 name = "typescript"
 formatter = { command = "prettierd" }
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
 
 [[language]]
 name = "nix"
 formatter = { command = "nixpkgs-fmt" }
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
 
 [[language]]
 name = "python"
 formatter = { command = "black", args = ["-q", "-"] }
+indent = { tab-width = 4, unit = "    " }
+auto-format = true

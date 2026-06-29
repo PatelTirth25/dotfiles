@@ -13,7 +13,6 @@ idle-timeout = 0
 completion-timeout = 5
 popup-border = "all"
 auto-save = false
-auto-format = true
 end-of-line-diagnostics = "hint"
 
 [editor.cursor-shape]
