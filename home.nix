@@ -73,6 +73,8 @@ in
   };
 
   home.packages = with pkgs; [
+    telegram-desktop
+    qbittorrent
     helix
     opencode
     vim
@@ -80,6 +82,8 @@ in
     nil
     nixpkgs-fmt
     gcc
+    mpv
+    ani-cli
     nodejs
     clang-tools
     basedpyright
