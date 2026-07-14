@@ -25,11 +25,15 @@
 
   # services.flatpak.enable = false;
 
+
+  nixpkgs.config.allowUnfree = true;
+
   hardware.graphics.enable = true;
   security.polkit.enable = true;
 
   programs.sway = {
     enable = true;
+    xwayland.enable = true;
     wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
       swaylock
@@ -56,6 +60,7 @@
     enable = true;
     pulse.enable = true;
     alsa.enable = true;
+    wireplumber.enable = true;
   };
 
   services.libinput.enable = true;
@@ -72,8 +77,28 @@
 
   # programs.firefox.enable = true;
 
+  programs.nix-ld.enable = true;
+
+  xdg.portal = {
+    enable = true;
+
+    extraPortals = with pkgs; [
+      xdg-desktop-portal
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
+    ];
+
+  };
+
+
+  xdg.portal.config.common.default = lib.mkForce [ "gtk" ];
+
+  environment.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = "1";
+  };
 
   environment.systemPackages = with pkgs; [
+    wf-recorder
     ntfs3g
     btop
     wget

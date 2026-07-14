@@ -73,6 +73,7 @@ in
   };
 
   home.packages = with pkgs; [
+    brave
     telegram-desktop
     qbittorrent
     helix
@@ -83,6 +84,7 @@ in
     nixpkgs-fmt
     gcc
     mpv
+    libreoffice
     ani-cli
     nodejs
     clang-tools
