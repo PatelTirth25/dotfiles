@@ -124,6 +124,7 @@
 
   fonts.packages = with pkgs; [
     nerd-fonts.noto
+    corefonts
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

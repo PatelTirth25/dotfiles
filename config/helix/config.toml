@@ -43,6 +43,7 @@ p = "paste_clipboard_after"
 P = "paste_clipboard_before"
 d = "delete_selection_noyank"
 c = "change_selection_noyank"
+";" = "repeat_last_motion"
 
 [keys.select]
 y = "yank_main_selection_to_clipboard"

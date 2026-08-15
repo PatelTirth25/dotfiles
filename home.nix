@@ -23,7 +23,6 @@ let
     "bluetoothdevice"
     "clearcache"
     "connectwifi"
-    "cpu_usage"
     "dateformat"
     "ram_usage"
     "startup"
@@ -72,8 +71,15 @@ in
     tmux.enableShellIntegration = true;
   };
 
+
+  programs.zed-editor = {
+    enable = true;
+    installRemoteServer = true;
+  };
+
   home.packages = with pkgs; [
     brave
+    neovim
     telegram-desktop
     qbittorrent
     helix
@@ -83,9 +89,8 @@ in
     nil
     nixpkgs-fmt
     gcc
+    onlyoffice-desktopeditors
     mpv
-    libreoffice
-    ani-cli
     nodejs
     clang-tools
     basedpyright
