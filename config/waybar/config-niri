@@ -8,7 +8,7 @@
     "custom/wifi": {
         "exec" : "wifiName 2>/dev/null",
         "interval" : 5,
-        "on-click": "kitty nmtui"
+        "on-click": "kitty impala-nm"
     },
     "bluetooth": {
         "format": " {status}",

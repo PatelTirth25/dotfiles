@@ -47,3 +47,4 @@ c = "change_selection_noyank"
 
 [keys.select]
 y = "yank_main_selection_to_clipboard"
+d = "delete_selection_noyank"

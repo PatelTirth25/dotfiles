@@ -110,6 +110,7 @@ export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin/caa:$PATH"
 export PATH="/home/tirth/.avm/bin:$PATH"
+export PATH=$PATH:~/.spicetify
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 

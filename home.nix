@@ -1,6 +1,9 @@
 { config, pkgs, inputs, lib, ... }:
 
+
 let
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+
   configDirs = [
     "sway"
     "kitty"
@@ -36,6 +39,7 @@ in
 {
   imports = [
     inputs.zen-browser.homeModules.beta
+    inputs.spicetify-nix.homeManagerModules.spicetify
   ];
 
   home.username = "tirth";
@@ -48,6 +52,17 @@ in
   programs.zen-browser = {
     enable = true;
     setAsDefaultBrowser = true;
+  };
+
+
+  programs.spicetify = {
+    enable = true;
+
+    enabledExtensions = with spicePkgs.extensions; [
+      adblockify
+      shuffle
+    ];
+
   };
 
   programs.tmux = {
@@ -102,6 +117,8 @@ in
     stylua
     rust-analyzer
     rustfmt
+    cargo
+    clippy
   ];
 
   xdg.configFile =

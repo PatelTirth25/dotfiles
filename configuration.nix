@@ -8,7 +8,10 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = [ "quiet" "loglevel=3" ];
+  boot.kernelParams = [
+    "quiet"
+    "loglevel=0"
+  ];
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -116,6 +119,8 @@
     fastfetch
     gammastep
     grim
+    zip
+    unzip
     slurp
     efibootmgr
     bluetui

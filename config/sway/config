@@ -15,7 +15,7 @@ set $down h
 set $up l
 # Your preferred terminal emulator
 set $term kitty 
-set $menu /home/tirth/.config/rofi/launchers/type-6/launcher.sh
+set $menu /home/tirth/.config/rofi/launchers/type-1/launcher.sh
 set $file nemo
 set $browser zen-beta
 
@@ -274,8 +274,8 @@ client.focused "#9f1209" "#9f1209" "#ffffff" "#9f1209"
 # bluetui
 for_window [app_id="kitty" title="bluetui"] floating enable, resize set width 50 ppt height 50 ppt, move position center
 
-# nmtui
-# for_window [app_id="kitty" title="nmtui"] floating enable, resize set width 50 ppt height 50 ppt, move position center
+# impala
+for_window [app_id="kitty" title="impala"] floating enable, resize set width 50 ppt height 50 ppt, move position center
 
 # pavucontrol 
 for_window [app_id="pavucontrol"] floating enable, resize set width 50 ppt height 50 ppt, move position center
