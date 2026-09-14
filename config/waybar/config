@@ -1,9 +1,26 @@
 {
     "layer": "top",
     "position": "top",
-    "modules-left" : ["cpu","custom/memory", "custom/wifi", "bluetooth"],
-    "modules-center": ["sway/workspaces"],
-    "modules-right": [ "backlight","pulseaudio", "custom/battery", "custom/time" , "custom/date", "custom/restart", "custom/power"],
+
+    "modules-left": [
+        "sway/workspaces"
+    ],
+    
+    "modules-center": [],
+    
+    "modules-right": [
+        "cpu",
+        "custom/memory",
+        "custom/wifi",
+        "bluetooth",
+        "backlight",
+        "pulseaudio",
+        "custom/battery",
+        "custom/time",
+        "custom/date",
+        "custom/restart",
+        "custom/power"
+    ],
 
     "sway/workspaces": {
         "disable-scroll": true,

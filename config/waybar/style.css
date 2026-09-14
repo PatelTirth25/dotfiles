@@ -1,106 +1,187 @@
-@import "mocha.css";
-
 * {
-    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", sans-serif;
-    font-size: 15px;
+    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", monospace;
+    font-size: 14px;
+    font-weight: 500;
     min-height: 0;
 }
 
+/* =========================================================
+ * WAYBAR
+ * ========================================================= */
+
 #waybar {
-    background: transparent;
-    color: @text;
+    background: #000000;
+    color: #d8dee9;
+
     margin: 0;
     padding: 0;
+
+    transition: none;
 }
 
+/* =========================================================
+ * WORKSPACES
+ * ========================================================= */
+
 #workspaces {
-    background-color: rgba(0, 0, 0, 0.9);
+    background: #000000;
     margin: 0;
-    padding: 0 2px;
-    border-radius: 0 0 10px 10px;
+    padding: 0 6px;
 }
 
 #workspaces button {
-    color: @lavender;
-    background-color: transparent;
-    padding: 0.3rem 0.6rem;
-    margin: 0 1px;
-    transition: background-color 0.2s ease;
-    border-radius: 0 0 10px 10px;
-}
+    background: transparent;
+    color: #8a8a8a;
 
-#workspaces button.focused {
-    color: @base;
-    background-color: @lavender;
-    font-weight: bold;
+    border: none;
+    border-radius: 0;
+
+    padding: 0 7px;
+    margin: 0;
+
+    box-shadow: none;
+    text-shadow: none;
 }
 
 #workspaces button:hover {
-    color: @sapphire;
-    background-color: rgba(255, 255, 255, 0.1);
+    background: transparent;
+    color: #ffffff;
+    box-shadow: none;
 }
 
-#backlight,
-#custom-date,
-#custom-time,
-#custom-battery,
-#custom-wifi,
-#custom-memory,
-#custom-restart,
-#bluetooth,
+#workspaces button.focused {
+    background: transparent;
+    color: #ffffff;
+
+    font-weight: 700;
+
+    box-shadow: inset 0 -2px #c678dd;
+}
+
+#workspaces button.urgent {
+    background: transparent;
+    color: #ff6b6b;
+}
+
+/* =========================================================
+ * COMMON MODULE STYLE
+ * ========================================================= */
+
 #cpu,
+#custom-memory,
+#custom-wifi,
+#bluetooth,
+#backlight,
 #pulseaudio,
+#custom-battery,
+#custom-time,
+#custom-date,
+#custom-restart,
 #custom-power {
-    background-color: rgba(0, 0, 0, 0.9);
-    padding: 0.3rem 0.7rem;
+    background: transparent;
+
+    border: none;
     border-radius: 0;
+
+    margin: 0;
+    padding: 0 9px;
+
+    box-shadow: none;
+    text-shadow: none;
 }
 
-#custom-date {
-    color: @blue;
-}
-
-#custom-time {
-    color: rgb(250, 111, 115);
-}
-
-#custom-battery {
-    color: @green;
-}
-
-#backlight {
-    color: @yellow;
-    border-radius: 0 0 0 10px;
-}
-
-#pulseaudio {
-    color: @maroon;
-}
-
-#custom-power {
-    color: orangered;
-    font-size: 1.3rem;
-    border-radius: 0 0 10px 0;
-}
-
-#custom-restart {
-    color: green;
-}
+/* =========================================================
+ * LEFT SIDE SYSTEM INFO
+ * ========================================================= */
 
 #cpu {
-    color: cyan;
-    border-radius: 0 0 0 10px;
+    color: #61afef;
 }
 
 #custom-memory {
-    color: @green;
+    color: #98c379;
 }
 
 #custom-wifi {
-    color: orange;
+    color: #e5c07b;
 }
 
 #bluetooth {
-    color: pink;
-    border-radius: 0 0 10px 0;
+    color: #c678dd;
+}
+
+/* =========================================================
+ * RIGHT SIDE
+ * ========================================================= */
+
+#backlight {
+    color: #e5c07b;
+}
+
+#pulseaudio {
+    color: #e06c75;
+}
+
+#custom-battery {
+    color: #98c379;
+}
+
+#custom-time {
+    color: #ff6b73;
+    font-weight: 600;
+}
+
+#custom-date {
+    color: #61afef;
+}
+
+/* =========================================================
+ * POWER / RESTART
+ * ========================================================= */
+
+#custom-restart {
+    color: #abb2bf;
+
+    padding-left: 10px;
+    padding-right: 8px;
+}
+
+#custom-power {
+    color: #e06c75;
+
+    padding-left: 8px;
+    padding-right: 12px;
+}
+
+/* =========================================================
+ * RETRO SEPARATORS
+ *
+ * Very subtle vertical separators between modules.
+ * ========================================================= */
+
+#custom-memory,
+#custom-wifi,
+#bluetooth,
+#pulseaudio,
+#custom-battery,
+#custom-date,
+#custom-restart,
+#custom-power {
+    border-left: 1px solid #222222;
+}
+
+/* =========================================================
+ * TOOLTIP
+ * ========================================================= */
+
+tooltip {
+    background: #000000;
+    border: 1px solid #444444;
+
+    color: #ffffff;
+    padding: 6px 8px;
+}
+
+tooltip label {
+    color: #ffffff;
 }
