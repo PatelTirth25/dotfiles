@@ -119,6 +119,8 @@ in
     rustfmt
     cargo
     clippy
+    vscode
+    chromium
   ];
 
   xdg.configFile =

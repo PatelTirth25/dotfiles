@@ -96,6 +96,8 @@
 
   xdg.portal.config.common.default = lib.mkForce [ "gtk" ];
 
+  environment.localBinInPath = true;
+
   environment.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
   };
@@ -125,6 +127,7 @@
     efibootmgr
     bluetui
     trash-cli
+    uv
   ];
 
   fonts.packages = with pkgs; [
