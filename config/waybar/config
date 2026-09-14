@@ -45,7 +45,7 @@
         "on-click": "kitty bluetui"
     },
     "cpu": {
-        "format": "  {usage}% ",
+        "format": " {usage}% ",
         "max-length": 10
     },
     "custom/memory": {

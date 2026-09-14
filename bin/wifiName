@@ -1,7 +1,7 @@
 name=$(nmcli device | grep -w "connected" | grep wlp3s0 | awk '{for (i=4;i<=NF;i++) printf$i " "}')
 
 if [ $name = "--" ]; then
-    echo "  "
+    echo " "
 else
-    echo "   $name "
+    echo "  $name "
 fi

@@ -1,5 +1,5 @@
 datetime() {
-    date +"  %d-%m %A "
+    date +" %d-%m %A "
 }
 
 datetime
