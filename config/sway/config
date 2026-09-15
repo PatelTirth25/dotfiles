@@ -266,10 +266,10 @@ bindsym $mod+$up resize grow width 10 px
 gaps inner 3
 gaps outer 3
 
-default_border pixel 2
-default_floating_border pixel 2
+default_border pixel 1
+default_floating_border pixel 1
 
-client.focused "#9f1209" "#9f1209" "#ffffff" "#9f1209"
+client.focused "#c678dd" "#c678dd" "#c678dd" "#c678dd"
 
 # bluetui
 for_window [app_id="kitty" title="bluetui"] floating enable, resize set width 50 ppt height 50 ppt, move position center
