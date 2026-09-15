@@ -18,7 +18,6 @@ let
 
   homeFiles = [
     ".zshrc"
-    ".tmux.conf"
   ];
 
   binFiles = [
@@ -75,7 +74,10 @@ in
       {
         plugin = tmux-fzf;
         extraConfig = ''
-                '';
+          set -sg escape-time 10
+          setw -g mode-keys vi
+          set -as terminal-features ",*:RGB"
+        '';
       }
     ];
   };
