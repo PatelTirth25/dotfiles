@@ -18,6 +18,7 @@ let
 
   homeFiles = [
     ".zshrc"
+    ".tmux.conf"
   ];
 
   binFiles = [
