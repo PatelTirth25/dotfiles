@@ -39,7 +39,7 @@
     "custom/wifi": {
         "exec" : "wifiName 2>/dev/null",
         "interval" : 5,
-        "on-click": "kitty impala-nm"
+        "on-click": "kitty wlctl"
     },
     "bluetooth": {
         "format": " {status}",

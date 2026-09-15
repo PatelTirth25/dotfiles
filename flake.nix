@@ -18,6 +18,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    wlctl = {
+      url = "github:aashish-thapa/wlctl";
+    };
   };
 
   outputs = inputs @ { self, nixpkgs, home-manager, ... }: {

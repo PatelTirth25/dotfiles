@@ -3,6 +3,7 @@
 
 let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+  wlctl = inputs.wlctl.packages.${pkgs.system}.default;
 
   configDirs = [
     "sway"
@@ -124,6 +125,7 @@ in
     clippy
     vscode
     chromium
+    wlctl
   ];
 
   xdg.configFile =
