@@ -1,50 +1,62 @@
 #!/usr/bin/env bash
 set -e
 
-echo "=== Removing npm cache folders ==="
+echo "=== Cleaning npm ==="
+
 npm cache clean --force 2>/dev/null || true
-rm -rf ~/.cache/npm
 rm -rf ~/.npm/_npx
 rm -rf ~/.npm/_logs
-rm -rf ~/.npm/_cacache
 rm -rf node_modules/.cache 2>/dev/null || true
 
-echo "=== Cleaning pnpm cache ==="
+
+echo "=== Cleaning pnpm ==="
+
 pnpm store prune 2>/dev/null || true
-rm -rf ~/.pnpm-store
-rm -rf ~/.local/share/pnpm/store
 
-echo "=== Cleaning yarn cache ==="
+
+echo "=== Cleaning yarn ==="
+
 yarn cache clean --all 2>/dev/null || true
-rm -rf ~/.cache/yarn
-rm -rf ~/.yarn
 
-echo "=== Cleaning cargo cache ==="
-cargo cache -a 2>/dev/null || true
+
+echo "=== Cleaning Cargo ==="
+
+# Remove downloaded registry/git sources that are not currently needed
 rm -rf ~/.cargo/registry
 rm -rf ~/.cargo/git
 
+
 echo "=== Cleaning Nix generations ==="
 
-# Delete old user profile generations
-nix profile wipe-history --older-than 7d 2>/dev/null || true
+# Remove old user-profile generations
+nix profile wipe-history --older-than 30d 2>/dev/null || true
 
-# Delete old system generations
-sudo nix-collect-garbage --delete-older-than 7d
+# Remove old NixOS generations
+sudo nix-collect-garbage --delete-older-than 30d
+
 
 echo "=== Optimizing Nix store ==="
+
 sudo nix-store --optimise
 
-echo "=== Cleaning old boot entries ==="
-sudo /run/current-system/bin/switch-to-configuration boot
 
-echo "=== Cleaning journal logs (keeping last 1 weeks) ==="
-sudo journalctl --vacuum-time=1weeks
+echo "=== Cleaning journal logs ==="
+
+sudo journalctl --vacuum-time=30d
+
 
 echo "=== Cleaning Docker ==="
+
+# WARNING:
+# This removes unused images/containers/networks/volumes.
+# Remove this section if you want to preserve unused Docker volumes.
 sudo docker system prune -af --volumes 2>/dev/null || true
 
+
 echo "=== Cleaning Trash ==="
-rm -rf ~/.local/share/Trash/*
+
+rm -rf ~/.local/share/Trash/files/*
+rm -rf ~/.local/share/Trash/info/*
+
 
 echo "=== Cleanup complete ==="
