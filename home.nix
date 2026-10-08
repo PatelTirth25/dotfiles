@@ -97,6 +97,7 @@ in
   };
 
   home.packages = with pkgs; [
+    cheese
     brave
     neovim
     telegram-desktop
@@ -124,7 +125,6 @@ in
     cargo
     clippy
     vscode
-    chromium
     wlctl
   ];
 
