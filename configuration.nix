@@ -55,10 +55,20 @@
     wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
       swaylock
-      wl-clipboard
       waybar
       swaybg
       rofi
+      kitty
+      pywal
+      nemo-with-extensions
+      nwg-look
+      bibata-cursors
+      gnome-themes-extra
+      adwaita-icon-theme
+      papirus-icon-theme
+      slurp
+      grim
+      gammastep
     ];
   };
 
@@ -119,31 +129,20 @@
 
   environment.systemPackages = with pkgs; [
     alsa-tools
+    wl-clipboard
     wf-recorder
     ntfs3g
     btop
     wget
     git
-    kitty
-    pywal
-    nemo-with-extensions
     brightnessctl
-    nwg-look
-    bibata-cursors
-    gnome-themes-extra
-    adwaita-icon-theme
-    papirus-icon-theme
     pavucontrol
     fastfetch
-    gammastep
-    grim
     zip
     unzip
-    slurp
     efibootmgr
     bluetui
     trash-cli
-    uv
   ];
 
   fonts.packages = with pkgs; [

@@ -115,6 +115,7 @@ in
     clang-tools
     basedpyright
     black
+    uv
     typescript-language-server
     typescript
     prettierd
