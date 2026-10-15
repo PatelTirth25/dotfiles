@@ -8,6 +8,10 @@
     font-size: 12px;
     font-weight: 500;
     min-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /* =========================================================
@@ -32,20 +36,20 @@ window#waybar {
     background: #000000;
     margin: 0;
     padding: 0 6px;
+    border-left: 1px solid #555555;
+    border-right: none;
 }
 
 #workspaces button {
     background: transparent;
     color: #555555;
-
     border: none;
     border-radius: 0;
-
     padding: 0 7px;
     margin: 0;
-
     box-shadow: none;
     text-shadow: none;
+    min-height: 0;
 }
 
 #workspaces button.focused {
@@ -87,6 +91,7 @@ window#waybar {
     border: none;
     border-radius: 0;
     box-shadow: none;
+    min-height: 0;
 }
 
 /* =========================================================
@@ -131,16 +136,26 @@ window#waybar {
 }
 
 /* =========================================================
- * SUBTLE RETRO SEPARATORS
+ * RETRO SEPARATORS
  * ========================================================= */
 
+/* Start of the bar; no separator after workspaces */
+#workspaces {
+    border-left: 1px solid #555555;
+    border-right: none;
+}
+
+/* Separator lines before the remaining modules */
+#cpu,
 #custom-memory,
 #custom-wifi,
 #bluetooth,
+#backlight,
 #pulseaudio,
 #custom-battery,
-#custom-date {
-    border-right: 1px solid #333333;
+#custom-date,
+#custom-time {
+    border-left: 1px solid #333333;
 }
 
 /* =========================================================
@@ -153,6 +168,7 @@ tooltip {
     border-radius: 0;
     color: #ffffff;
     padding: 2px 8px;
+    margin: 0;
 }
 
 tooltip label {

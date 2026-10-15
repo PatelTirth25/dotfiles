@@ -138,7 +138,8 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+q exec swaymsg exit
-    bindsym $mod+q exec  swaylock --image ~/.config/swaylock/dracula-wallpaper.svg --color 000000 --scaling fill 
+    # bindsym $mod+q exec  swaylock --image ~/.config/swaylock/dracula-wallpaper.svg --color 000000 --scaling fill 
+    bindsym $mod+q exec swaylock-plugin --command 'mpvpaper -o "no-audio --loop-file=inf --vf=fps=30 --panscan=1.0" "*" "$HOME/pix/live-wallpaper/frieren.mp4"'
 
     bindsym $mod+Shift+BackSpace exec "shutdown now"
     bindsym $mod+Shift+Delete exec "reboot"

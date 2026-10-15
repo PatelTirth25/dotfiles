@@ -28,6 +28,7 @@
 
   # services.flatpak.enable = false;
 
+  security.pam.services.swaylock-plugin = { };
 
   nixpkgs.config.allowUnfree = true;
 

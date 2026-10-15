@@ -12,7 +12,6 @@ let
     "rofi"
     "gammastep"
     "nwg-look"
-    "swaylock"
     "helix"
   ];
 
