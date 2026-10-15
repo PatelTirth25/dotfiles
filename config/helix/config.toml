@@ -45,6 +45,7 @@ P = "paste_clipboard_before"
 d = "delete_selection_noyank"
 c = "change_selection_noyank"
 ";" = "repeat_last_motion"
+D = ["extend_to_line_end", "delete_selection"]
 
 [keys.select]
 y = "yank_main_selection_to_clipboard"

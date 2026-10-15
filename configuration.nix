@@ -54,7 +54,9 @@
     xwayland.enable = true;
     wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
-      swaylock
+      autotiling
+      swaylock-plugin
+      mpvpaper
       waybar
       swaybg
       rofi

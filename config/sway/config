@@ -48,10 +48,14 @@ set $browser zen-beta
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
-exec /home/tirth/.local/bin/startup sway 
+# Startup script
+exec --no-startup-id /home/tirth/.local/bin/startup
+
+# Autotiling for sway
+exec_always --no-startup-id autotiling
 
 # Start polkit agent
-exec_always /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # For OBS
 # exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
@@ -130,11 +134,15 @@ exec_always /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
     floating_modifier $mod normal
 
     # Reload the configuration file
-    bindsym $mod+g exec "pkill -SIGUSR2 waybar && swaymsg reload && ~/.local/bin/startup sway"
+    bindsym $mod+g exec "swaymsg reload && ~/.local/bin/startup"
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+q exec swaymsg exit
     bindsym $mod+q exec  swaylock --image ~/.config/swaylock/dracula-wallpaper.svg --color 000000 --scaling fill 
+
+    bindsym $mod+Shift+BackSpace exec "shutdown now"
+    bindsym $mod+Shift+Delete exec "reboot"
+
 #
 # Moving around:
 #

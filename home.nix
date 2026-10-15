@@ -90,12 +90,6 @@ in
     tmux.enableShellIntegration = true;
   };
 
-
-  programs.zed-editor = {
-    enable = true;
-    installRemoteServer = true;
-  };
-
   home.packages = with pkgs; [
     cheese
     brave
