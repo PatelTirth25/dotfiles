@@ -36,8 +36,6 @@ window#waybar {
     background: #000000;
     margin: 0;
     padding: 0 6px;
-    border-left: 1px solid #555555;
-    border-right: none;
 }
 
 #workspaces button {
@@ -138,12 +136,6 @@ window#waybar {
 /* =========================================================
  * RETRO SEPARATORS
  * ========================================================= */
-
-/* Start of the bar; no separator after workspaces */
-#workspaces {
-    border-left: 1px solid #555555;
-    border-right: none;
-}
 
 /* Separator lines before the remaining modules */
 #cpu,
