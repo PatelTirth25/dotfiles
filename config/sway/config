@@ -123,3 +123,6 @@ client.focused "#c678dd" "#c678dd" "#c678dd" "#c678dd"
 for_window [app_id="kitty" title="bluetui"] floating enable, resize set width 50 ppt height 50 ppt, move position center
 for_window [app_id="kitty" title="wlctl"] floating enable, resize set width 50 ppt height 50 ppt, move position center
 for_window [app_id="pavucontrol"] floating enable, resize set width 50 ppt height 50 ppt, move position center
+
+
+include /etc/sway/config.d/*.conf
