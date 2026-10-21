@@ -21,6 +21,7 @@ let
   ];
 
   binFiles = [
+    "setup-audio"
     "screenshot"
     "battery"
     "bluetoothdevice"

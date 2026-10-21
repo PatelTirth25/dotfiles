@@ -100,9 +100,6 @@
   users.users.tirth = {
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "input" "audio" "networkmanager" ];
-    packages = with pkgs; [
-      tree
-    ];
     shell = pkgs.zsh;
   };
 
@@ -131,6 +128,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    tree
+    pulseaudio
     alsa-tools
     wl-clipboard
     wf-recorder

@@ -16,3 +16,6 @@ setsid waybar \
 # Start other services
 setsid "$HOME/.local/bin/wallpaper" &
 setsid gammastep -c "$HOME/.config/gammastep/config.ini" &
+
+# Start combined audio
+"$HOME/.local/bin/setup-audio"
