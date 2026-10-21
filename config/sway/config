@@ -10,6 +10,16 @@ set $menu /home/tirth/.config/rofi/launchers/type-4/launcher.sh
 set $file nemo
 set $browser zen-beta
 
+# Outputs
+# Laptop display on the left
+output eDP-1 mode 1920x1200@59.999Hz
+output eDP-1 pos 0 0
+
+# Acer B277U on the right: 1440p @ 120Hz with VRR
+output DP-2 mode 2560x1440@119.998Hz
+output DP-2 adaptive_sync on
+output DP-2 pos 1920 0
+
 # Startup
 exec --no-startup-id /home/tirth/.local/bin/startup
 exec_always --no-startup-id autotiling
@@ -58,17 +68,28 @@ bindsym XF86MonBrightnessUp exec brightnessctl set +5%
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
 # Workspace navigation
-bindsym $mod+6 workspace number 1
-bindsym $mod+7 workspace number 2
-bindsym $mod+8 workspace number 3
-bindsym $mod+9 workspace number 4
-bindsym $mod+0 workspace number 5
+bindsym $mod+6 workspace 1
+bindsym $mod+7 workspace 2
+bindsym $mod+8 workspace 3
+bindsym $mod+9 workspace 4
+bindsym $mod+0 workspace 5
 
-bindsym $mod+Shift+6 move container to workspace number 1
-bindsym $mod+Shift+7 move container to workspace number 2
-bindsym $mod+Shift+8 move container to workspace number 3
-bindsym $mod+Shift+9 move container to workspace number 4
-bindsym $mod+Shift+0 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace 1
+bindsym $mod+Shift+7 move container to workspace 2
+bindsym $mod+Shift+8 move container to workspace 3
+bindsym $mod+Shift+9 move container to workspace 4
+bindsym $mod+Shift+0 move container to workspace 5
+
+# Laptop display workspace
+workspace 6 output eDP-1
+bindsym $mod+grave workspace 6
+
+# Assign workspaces 1-5 to external monitor
+workspace 1 output DP-2
+workspace 2 output DP-2
+workspace 3 output DP-2
+workspace 4 output DP-2
+workspace 5 output DP-2
 
 # Focus between tiled windows
 bindsym $mod+$left focus left
@@ -123,6 +144,5 @@ client.focused "#c678dd" "#c678dd" "#c678dd" "#c678dd"
 for_window [app_id="kitty" title="bluetui"] floating enable, resize set width 50 ppt height 50 ppt, move position center
 for_window [app_id="kitty" title="wlctl"] floating enable, resize set width 50 ppt height 50 ppt, move position center
 for_window [app_id="pavucontrol"] floating enable, resize set width 50 ppt height 50 ppt, move position center
-
 
 include /etc/sway/config.d/*.conf

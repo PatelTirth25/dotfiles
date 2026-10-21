@@ -25,16 +25,13 @@
 
     "sway/workspaces": {
         "disable-scroll": true,
-        "sort-by-name": true,
+        "sort-by-number": true,
         "format": " {name} ",
         "persistent-workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": []
+            "DP-2": [1, 2, 3, 4, 5],
+            "eDP-1": [6]
         },
-        "on-click": "swaymsg workspace {name}"
+        "on-click": "swaymsg workspace number {name}"
     },
 
     "cpu": {
