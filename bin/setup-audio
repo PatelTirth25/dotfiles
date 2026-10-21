@@ -2,16 +2,22 @@
 set -euo pipefail
 
 PACTL="$(command -v pactl)"
+AMIXER="$(command -v amixer)"
 
 LAPTOP="alsa_output.pci-0000_00_1f.3.pro-output-0"
 MONITOR="alsa_output.pci-0000_00_1f.3.pro-output-3"
 COMBINED="combined_output"
 
-# Wait for both physical sinks to become available.
+sink_exists() {
+    "$PACTL" list short sinks |
+        awk '{print $2}' |
+        grep -Fxq "$1"
+}
+
+# Wait for PipeWire's PulseAudio server and laptop output.
 READY=0
 for _ in $(seq 1 30); do
-    if "$PACTL" list short sinks | grep -q "$LAPTOP" &&
-       "$PACTL" list short sinks | grep -q "$MONITOR"; then
+    if "$PACTL" info >/dev/null 2>&1 && sink_exists "$LAPTOP"; then
         READY=1
         break
     fi
@@ -19,19 +25,37 @@ for _ in $(seq 1 30); do
 done
 
 if [ "$READY" -ne 1 ]; then
-    echo "Error: laptop or monitor audio sink not available." >&2
+    echo "Error: laptop audio sink is unavailable." >&2
     exit 1
 fi
 
-# Create the combined sink only if it doesn't already exist.
-if ! "$PACTL" list short sinks | grep -q "$COMBINED"; then
-    "$PACTL" load-module module-combine-sink \
-        "sink_name=$COMBINED" \
-        "slaves=$LAPTOP,$MONITOR" \
-        "sink_properties=device.description=Combined_Output"
-fi
+# Restore laptop hardware volume.
+"$AMIXER" -c 0 sset Master 100% unmute
 
-# Set individual output volumes and default sink.
+# Set laptop software volume to 100%.
+"$PACTL" set-sink-mute "$LAPTOP" 0
 "$PACTL" set-sink-volume "$LAPTOP" 100%
-"$PACTL" set-sink-volume "$MONITOR" 80%
-"$PACTL" set-default-sink "$COMBINED"
+
+# Wait briefly for the monitor, but allow laptop-only operation.
+for _ in $(seq 1 10); do
+    sink_exists "$MONITOR" && break
+    sleep 1
+done
+
+# Include the monitor only when it is available.
+if sink_exists "$MONITOR"; then
+    if ! sink_exists "$COMBINED"; then
+        "$PACTL" load-module module-combine-sink \
+            "sink_name=$COMBINED" \
+            "slaves=$LAPTOP,$MONITOR" \
+            "sink_properties=device.description=Combined_Output"
+    fi
+
+    "$PACTL" set-sink-mute "$MONITOR" 0
+    "$PACTL" set-sink-volume "$MONITOR" 100%
+
+    "$PACTL" set-default-sink "$COMBINED"
+else
+    echo "Monitor unavailable; using laptop speakers."
+    "$PACTL" set-default-sink "$LAPTOP"
+fi

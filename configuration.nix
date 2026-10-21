@@ -26,6 +26,8 @@
     powerOnBoot = false;
   };
 
+  hardware.alsa.enablePersistence = true;
+
   # services.flatpak.enable = false;
 
   security.pam.services.swaylock-plugin = { };
@@ -131,6 +133,7 @@
     tree
     pulseaudio
     alsa-tools
+    alsa-utils
     wl-clipboard
     wf-recorder
     ntfs3g
