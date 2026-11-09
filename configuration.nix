@@ -21,12 +21,31 @@
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
+
+  # Enable libvirt and virt-manager
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
+  # Enable spice USB redirection
+  virtualisation.spiceUSBRedirection.enable = true;
+
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = false;
   };
 
   hardware.alsa.enablePersistence = true;
+
+  systemd.services.disable-alsa-auto-mute = {
+    description = "Disable ALSA Auto-Mute Mode on Intel Audio Card";
+    after = [ "sound.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.alsa-utils}/bin/amixer -c 0 sset 'Auto-Mute Mode' Disabled";
+      RemainAfterExit = true;
+    };
+  };
 
   # services.flatpak.enable = false;
 
@@ -92,8 +111,14 @@
   services.pipewire = {
     enable = true;
     pulse.enable = true;
-    alsa.enable = true;
-    wireplumber.enable = true;
+    extraConfig.pipewire-pulse."99-combined-speakers" = {
+      "pulse.cmd" = [
+        {
+          cmd = "load-module";
+          args = "module-combine-sink sink_name=combined_speakers slaves=alsa_output.pci-0000_00_1f.3.pro-output-0,alsa_output.pci-0000_00_1f.3.pro-output-3";
+        }
+      ];
+    };
   };
 
   services.libinput.enable = true;
@@ -101,7 +126,7 @@
 
   users.users.tirth = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" "input" "audio" "networkmanager" ];
+    extraGroups = [ "wheel" "video" "input" "audio" "networkmanager" "libvirtd" ];
     shell = pkgs.zsh;
   };
 
@@ -130,6 +155,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    dnsmasq
+    virt-viewer
     tree
     pulseaudio
     alsa-tools
@@ -144,6 +171,7 @@
     pavucontrol
     fastfetch
     zip
+    p7zip
     unzip
     efibootmgr
     bluetui
