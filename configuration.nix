@@ -29,6 +29,8 @@
   # Enable spice USB redirection
   virtualisation.spiceUSBRedirection.enable = true;
 
+  hardware.i2c.enable = true;
+
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = false;
@@ -126,7 +128,7 @@
 
   users.users.tirth = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" "input" "audio" "networkmanager" "libvirtd" ];
+    extraGroups = [ "wheel" "video" "input" "audio" "networkmanager" "libvirtd" "i2c" ];
     shell = pkgs.zsh;
   };
 
@@ -155,6 +157,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    jq
+    ddcutil
     dnsmasq
     virt-viewer
     tree

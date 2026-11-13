@@ -22,6 +22,7 @@ let
 
   binFiles = [
     "screenshot"
+    "brightness_control"
     "battery"
     "bluetoothdevice"
     "clearcache"

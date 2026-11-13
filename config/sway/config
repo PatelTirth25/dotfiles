@@ -64,8 +64,8 @@ bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
 bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
 # Brightness
-bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec ~/.local/bin/brightness_control up
+bindsym XF86MonBrightnessDown exec ~/.local/bin/brightness_control down
 
 # Workspace navigation
 bindsym $mod+6 workspace 1

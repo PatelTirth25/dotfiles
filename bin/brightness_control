@@ -1,0 +1,20 @@
+#!/bin/sh
+
+OUTPUT=$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')
+
+case "$OUTPUT" in
+    eDP-1)
+        if [ "$1" = "up" ]; then
+            brightnessctl set +5%
+        else
+            brightnessctl set 5%-
+        fi
+        ;;
+    DP-2)
+        if [ "$1" = "up" ]; then
+            ddcutil --bus=16 setvcp 10 + 5
+        else
+            ddcutil --bus=16 setvcp 10 - 5
+        fi
+        ;;
+esac
